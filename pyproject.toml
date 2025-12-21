@@ -1,0 +1,35 @@
+[project]
+name = "weather-info-to-slack"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "playwright>=1.57.0",
+    "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
+    "slack-sdk>=3.39.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.10",
+]
+
+[tool.ruff]
+# 1行の最大文字数
+line-length = 88
+# 対象とするPythonバージョン
+target-version = "py311"
+# チェック対象のディレクトリ
+src = ["src"]
+
+[tool.ruff.lint]
+# 有効にするルールセット（E:Error, F:Pyflakes, I:isort, W:Warning）
+select = ["E", "F", "I", "W"]
+# 無視するルール
+ignore = []
+
+[tool.ruff.lint.isort]
+# importの並び替え
+known-first-party = ["src"]
