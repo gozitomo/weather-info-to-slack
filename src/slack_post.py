@@ -3,7 +3,7 @@ import os
 from slack_sdk import WebClient
 
 
-def send_image_to_slack(file_path, comment):
+def send_all_image_to_slack(file_path, comment):
     """
     send_image_to_slack の Docstring
     保存された画像をSlackに投稿する

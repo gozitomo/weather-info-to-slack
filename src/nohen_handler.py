@@ -1,10 +1,10 @@
 import os
 
 
-def goto_nohen_rain_pred(page):
+def goto_nohen_temperature_pred(page):
     """
     login_nohen の Docstring
-    nohenページにログインし、降水可能性予測ページに遷移
+    nohenページにログインし、気温予測ページに遷移
     :param page: PlaywrightのPageオブジェクト　操作対象のブラウザページ
     """
     try:
@@ -29,7 +29,7 @@ def goto_nohen_rain_pred(page):
         page.locator('button[type="submit"]').click()
         # ページが完全に読み込まれるまで少し待機
         page.wait_for_selector(".main_container")
-        print("1. 降水可能性予測ページURLにアクセスします...")
+        print("1. 気温予測ページURLにアクセスします...")
         page.goto(nohen_pred_url)
 
         # ログイン後のページ読み込みを待機
