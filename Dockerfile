@@ -25,7 +25,7 @@ RUN dnf install -y \
     vulkan-loader \
     nss \
     # 日本語フォントを追加
-    google-noto-sans-cjk-jp-fonts \
+    # google-noto-sans-cjk-jp-fonts \
     && dnf clean all
 
 # 3. requirements.txt をコピーしてライブラリをインストール
