@@ -143,6 +143,6 @@ if __name__ == "__main__":
     ローカルでの手動テスト用
     """
     lambda_handler({}, None)
-    local_output_dir = os.path.join(os.path.dirname(__file__), "../data")
-    print("ローカルモードで実行...")
-    run_weather_bot(local_output_dir)
+    # local_output_dir = os.path.join(os.path.dirname(__file__), "../data")
+    # print("ローカルモードで実行...")
+    # run_weather_bot(local_output_dir)
