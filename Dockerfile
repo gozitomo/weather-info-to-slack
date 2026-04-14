@@ -50,5 +50,5 @@ RUN playwright install chromium
 COPY src/ ./
 
 # 6. Lambda ハンドラーの実行指示
-# (src/main.py 内の lambda_handler 関数を呼び出す設定)
-CMD [ "main.lambda_handler" ]
+# srcの中身をカレントディレクトリにコピーしている場合
+CMD [ "python",  "main.py" ]
