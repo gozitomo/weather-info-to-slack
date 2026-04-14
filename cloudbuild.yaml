@@ -1,0 +1,26 @@
+steps:
+  # 1. Dockerイメージをビルドする
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME:$COMMIT_SHA', '.']
+
+  # 2. イメージを Artifact Registry にプッシュする
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME:$COMMIT_SHA']
+
+  # 3. Cloud Run ジョブをデプロイ（更新）する
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'deploy'
+      - 'weather-info-to-slack' # ジョブ名（自分のものに合わせて変更）
+      - '--image'
+      - 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME:$COMMIT_SHA'
+      - '--region'
+      - 'asia-northeast1'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  # これを追加
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
