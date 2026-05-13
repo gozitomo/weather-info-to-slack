@@ -79,19 +79,19 @@ def run_weather_bot(output_dir):
         # browser.close()
 
         try:
-            rain_pred_img = get_nohen_imgs_by_requests("rain", "prob")
+            rain_pred_img = get_nohen_imgs_by_requests("rain", "prab")
             print("nohen_雨予測画像の取得に成功")
         except Exception as e:
             print(f"API_ACCESS_ERROR:{e}")
 
         try:
-            wind_pred_img = get_nohen_imgs_by_requests("wind", "prob")
+            wind_pred_img = get_nohen_imgs_by_requests("wind", "all")
             print("nohen_風予測画像の取得に成功")
         except Exception as e:
             print(f"API_ACCESS_ERROR:{e}")
 
         try:
-            temperature_pred_img = get_nohen_imgs_by_requests("wind", "all")
+            temperature_pred_img = get_nohen_imgs_by_requests("temp", "all")
             print("nohen_気温予測画像の取得に成功")
         except Exception as e:
             print(f"API_ACCESS_ERROR:{e}")
