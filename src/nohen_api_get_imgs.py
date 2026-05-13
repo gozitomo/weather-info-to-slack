@@ -3,13 +3,13 @@ import os
 import requests
 
 
-def get_nohen_imgs_by_requests(data_id: str):
+def get_nohen_imgs_by_requests(data_id: str, data_type: str):
     api_url = os.getenv("NOHEN_API_URL")
     json = {
         "token": os.getenv("NOHEN_API_TOKEN"),
         # 降水量："rain", 風向・風速："wind"
         "data_id": data_id,
-        "data_type": "prab",
+        "data_type": data_type,
     }
 
     response = requests.post(api_url, json=json)
