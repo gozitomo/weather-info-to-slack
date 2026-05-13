@@ -42,59 +42,59 @@ def run_weather_bot(output_dir):
     # 環境変数をロード
     load_dotenv()
 
-    # try:
-    # with sync_playwright() as p:
-    # browser = p.chromium.launch(
-    #     headless=True,
-    #     args=[
-    #         "--no-sandbox",
-    #         "--disable-setuid-sandbox",
-    #         "--disable-dev-shm-usage",
-    #         "--single-process",
-    #     ],
-    # )
-    # ビューポートを大きめに設定
-    # context = browser.new_context(viewport={"width": 1280, "height": 1600})
-    # page = context.new_page()
-
-    # # nohenページから気温予測画像を取得
-    # if goto_nohen_temperature_pred(page):
-    #     # nohenの画像を取得
-    #     success_nohen = save_base64_image(
-    #         page, "img.resize_graph >> nth=1", nohen_output_path
-    #     )
-    #     if success_nohen:
-    #         print("nohen画像の取得に成功")
-    #     else:
-    #         print("nohen画像の取得に失敗")
-
-    # # 気象庁予報ページのスクリーンショットを取得
-    # success_jma = capture_jma_table(page, jma_output_path)
-    # if success_jma:
-    #     print("気象庁スクショの取得に成功")
-    # else:
-    #     print("気象庁スクショの取得に失敗")
-
-    # # ブラウザを閉じる
-    # browser.close()
-
     try:
-        rain_pred_img = get_nohen_imgs_by_requests("rain", "prob")
-        print("nohen_雨予測画像の取得に成功")
-    except Exception as e:
-        print(f"API_ACCESS_ERROR:{e}")
+        # with sync_playwright() as p:
+        # browser = p.chromium.launch(
+        #     headless=True,
+        #     args=[
+        #         "--no-sandbox",
+        #         "--disable-setuid-sandbox",
+        #         "--disable-dev-shm-usage",
+        #         "--single-process",
+        #     ],
+        # )
+        # ビューポートを大きめに設定
+        # context = browser.new_context(viewport={"width": 1280, "height": 1600})
+        # page = context.new_page()
 
-    try:
-        wind_pred_img = get_nohen_imgs_by_requests("wind", "prob")
-        print("nohen_風予測画像の取得に成功")
-    except Exception as e:
-        print(f"API_ACCESS_ERROR:{e}")
+        # # nohenページから気温予測画像を取得
+        # if goto_nohen_temperature_pred(page):
+        #     # nohenの画像を取得
+        #     success_nohen = save_base64_image(
+        #         page, "img.resize_graph >> nth=1", nohen_output_path
+        #     )
+        #     if success_nohen:
+        #         print("nohen画像の取得に成功")
+        #     else:
+        #         print("nohen画像の取得に失敗")
 
-    try:
-        temperature_pred_img = get_nohen_imgs_by_requests("wind", "all")
-        print("nohen_気温予測画像の取得に成功")
-    except Exception as e:
-        print(f"API_ACCESS_ERROR:{e}")
+        # # 気象庁予報ページのスクリーンショットを取得
+        # success_jma = capture_jma_table(page, jma_output_path)
+        # if success_jma:
+        #     print("気象庁スクショの取得に成功")
+        # else:
+        #     print("気象庁スクショの取得に失敗")
+
+        # # ブラウザを閉じる
+        # browser.close()
+
+        try:
+            rain_pred_img = get_nohen_imgs_by_requests("rain", "prob")
+            print("nohen_雨予測画像の取得に成功")
+        except Exception as e:
+            print(f"API_ACCESS_ERROR:{e}")
+
+        try:
+            wind_pred_img = get_nohen_imgs_by_requests("wind", "prob")
+            print("nohen_風予測画像の取得に成功")
+        except Exception as e:
+            print(f"API_ACCESS_ERROR:{e}")
+
+        try:
+            temperature_pred_img = get_nohen_imgs_by_requests("wind", "all")
+            print("nohen_気温予測画像の取得に成功")
+        except Exception as e:
+            print(f"API_ACCESS_ERROR:{e}")
 
         # Slackに画像を投稿
         # 送信ファイルリスト
@@ -130,7 +130,7 @@ def run_weather_bot(output_dir):
         #     upload_files.append(
         #         {"path": jma_output_path, "title": "【気象庁】2週間気温予報"}
         #     )
-    try:
+
         # Slackに画像を投稿
         for file in upload_files:
             success_post = send_all_image_to_slack(file["path"], file["title"])
