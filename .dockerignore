@@ -1,0 +1,4 @@
+# Playwright関連（現在は使用していないため除外）
+src/nohen_handler.py
+src/jma_handler.py
+src/encode_base64.py

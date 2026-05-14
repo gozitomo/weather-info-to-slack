@@ -1,35 +1,8 @@
 # 1. AWS Lambda Python 3.12 のベースイメージを使用（osバージョン考慮）
-# FROM public.ecr.aws/lambda/python:3.12
-
-# 2. Chromiumの実行に必要な依存ライブラリを手動でインストール (Amazon Linux用)
-# Amazon 新しいOS（AL2023）用の依存関係
-# Amazon Linux 2023 (AL2023) 用の依存関係（修正版）
-# RUN dnf install -y \
-#     alsa-lib \
-#     atk \
-#     at-spi2-atk \
-#     cups-libs \
-#     gtk3 \
-#     libXcomposite \
-#     libXcursor \
-#     libXdamage \
-#     libXext \
-#     libXi \
-#     libXrandr \
-#     libXtst \
-#     pango \
-#     libdrm \
-#     mesa-libgbm \
-#     libxshmfence \
-#     liberation-sans-fonts \
-#     vulkan-loader \
-#     nss \
-    # 日本語フォントを追加
-    # google-noto-sans-cjk-jp-fonts \
-    # && dnf clean all
+FROM python:3.12-slim
 
 # 1. Playwright公式イメージ（依存ライブラリが全て含む）
-FROM mcr.microsoft.com/playwright/python:v1.42.0-jammy
+# FROM mcr.microsoft.com/playwright/python:v1.42.0-jammy
 
 # 2. 作業ディレクトリ設定
 WORKDIR /app
@@ -41,8 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 4. Playwright の Chromium 本体をインストール
 # (Lambdaの容量制限を意識して他のブラウザは入れない)
-ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
-RUN playwright install chromium
+# ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+# RUN playwright install chromium
 
 # 5. ソースコードをコンテナ内にコピー
 # (srcディレクトリの中身を Lambda のタスクルートにコピー)
